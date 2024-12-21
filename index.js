@@ -6,12 +6,26 @@ const articleTableBody = document.getElementById("article-table").getElementsByT
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
 
-// Load existing data from localStorage
+// Load existing data from localStorage or JSON file
 window.addEventListener("load", () => {
     const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
-    savedArticles.forEach((article) => {
-        addArticleToTable(article.articleNumber, article.lockerNumber, false);
-    });
+    if (savedArticles.length > 0) {
+        savedArticles.forEach((article) => {
+            addArticleToTable(article.articleNumber, article.lockerNumber, false);
+        });
+    } else {
+        // Load JSON data if no localStorage data exists
+        fetch("index.json")
+            .then((response) => response.json())
+            .then((jsonData) => {
+                jsonData.forEach((article) => {
+                    addArticleToTable(article.articleNumber, article.lockerNumber, false);
+                });
+                // Save loaded JSON data to localStorage for future use
+                localStorage.setItem("articles", JSON.stringify(jsonData));
+            })
+            .catch((error) => console.error("Error loading JSON data:", error));
+    }
 });
 
 // Add article and locker to the table
