@@ -6,25 +6,18 @@ const articleTableBody = document.getElementById("article-table").getElementsByT
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
 
-// Load existing data from localStorage or JSON file
-window.addEventListener("load", () => {
-    const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
-    if (savedArticles.length > 0) {
-        savedArticles.forEach((article) => {
+// Load data from JSON file on page load
+window.addEventListener("load", async () => {
+    try {
+        const response = await fetch("index.json");
+        const articles = await response.json();
+
+        // Populate the table with articles from the JSON file
+        articles.forEach((article) => {
             addArticleToTable(article.articleNumber, article.lockerNumber, false);
         });
-    } else {
-        // Load JSON data if no localStorage data exists
-        fetch("index.json")
-            .then((response) => response.json())
-            .then((jsonData) => {
-                jsonData.forEach((article) => {
-                    addArticleToTable(article.articleNumber, article.lockerNumber, false);
-                });
-                // Save loaded JSON data to localStorage for future use
-                localStorage.setItem("articles", JSON.stringify(jsonData));
-            })
-            .catch((error) => console.error("Error loading JSON data:", error));
+    } catch (error) {
+        console.error("Failed to load articles:", error);
     }
 });
 
