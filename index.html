@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Article Finder</title>
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" id="search-input" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="button" id="search-button">Search</button>
+          </form>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1>Product Finder Prototype</h1>
+        <div class="mb-3">
+            <input type="text" id="article-input" class="form-control mb-2" placeholder="Enter Article Number">
+            <input type="text" id="locker-input" class="form-control mb-2" placeholder="Enter Locker Number">
+            <button class="btn btn-primary" id="add-article-button">Add Product</button>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered" id="article-table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Article Number</th>
+                        <th>Locker Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Articles will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
